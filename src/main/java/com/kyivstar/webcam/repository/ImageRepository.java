@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface ImageRepository extends JpaRepository<Image,Long> {
+public interface ImageRepository extends JpaRepository<Image,String> {
+    Image findByCameraIdAndTimestamp(String cameraId, Long timestamp);
 }
