@@ -1,24 +1,22 @@
 package com.kyivstar.webcam.configuration;
 
+
 import com.kyivstar.webcam.webcam.WebcamTask;
-import org.springframework.boot.SpringApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.event.ContextRefreshedEvent;
+
 
 import java.util.concurrent.*;
 
-/**
- * Created by igor on 21.09.17.
- */
+
 public class AppListener implements ApplicationListener<ApplicationReadyEvent> {
-
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(AppListener.class);
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+        LOGGER.info("Start capture images");
         ScheduledExecutorService executorService =  Executors.newScheduledThreadPool(5);
-        executorService.schedule(new WebcamTask(),5, TimeUnit.SECONDS);
-
+        executorService.schedule(new WebcamTask(),5, TimeUnit.SECONDS); //suppose WebcamTask is taken from queue with webcam devices
     }
 }

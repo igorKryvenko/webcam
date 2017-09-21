@@ -2,11 +2,12 @@ package com.kyivstar.webcam.repository;
 
 
 import com.kyivstar.webcam.model.Image;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.transaction.Transactional;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Transactional
-public interface ImageRepository extends JpaRepository<Image,String> {
+
+
+
+public interface ImageRepository extends MongoRepository<Image,String> {
     Image findByCameraIdAndTimestamp(String cameraId, Long timestamp);
 }

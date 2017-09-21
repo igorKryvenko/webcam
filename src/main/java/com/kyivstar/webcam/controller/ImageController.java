@@ -23,9 +23,6 @@ public class ImageController {
     @Autowired
     ContentService contentService;
 
-
-
-
     @GetMapping(value = "/image")
     public ResponseEntity<InputStreamResource> getImage(@RequestParam("id") String cameraId, @RequestParam("timestamp") Long timestamp) {
         Image image = imageRepository.findByCameraIdAndTimestamp(cameraId, timestamp);
