@@ -6,7 +6,7 @@ package com.kyivstar.webcam.model;
 public class StoreKey {
     private String cameraId;
     private String uuid;
-    private String fileName;
+
 
     public String getUuid() {
         return uuid;
@@ -15,11 +15,6 @@ public class StoreKey {
     public StoreKey setUuid(String uuid) {
         this.uuid = uuid;
         return this;
-    }
-
-
-    public String getFileName() {
-        return fileName;
     }
 
     public String getCameraId() {
@@ -31,11 +26,7 @@ public class StoreKey {
         return this;
     }
 
-    public StoreKey setFileName(String fileName) {
-        this.fileName = fileName;
-        return this;
-    }
     public String getKey() {
-        return String.format("camera/%s/%s/%s",cameraId,uuid,fileName);
+        return String.format("camera/%s/%s",cameraId,uuid);
     }
 }

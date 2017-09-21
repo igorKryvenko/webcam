@@ -30,17 +30,16 @@ public class ContentServiceImpl implements ContentService {
   @Autowired private ImageRepository imageRepository;
 
   @Override
-  public void save(FileItemIterator fileItemIterator, String cameraId) {
+  public void save(InputStream inputStream, String cameraId) {
     try {
-      FileItemStream itemStream = fileItemIterator.next();
-      String fileName = itemStream.getName();
+
+
       StoreKey storeKey =
           new StoreKey()
               .setUuid(UUID.randomUUID().toString())
-              .setFileName(fileName)
               .setCameraId(cameraId);
-      InputStream inputStream = itemStream.openStream();
-      uploadSave(storeKey, inputStream, itemStream.getContentType());
+
+      uploadSave(storeKey, inputStream);
 
     } catch (Exception e) {
       LOGGER.error("During upload", e);
@@ -57,8 +56,8 @@ public class ContentServiceImpl implements ContentService {
     return dr;
   }
 
-  protected void uploadSave(StoreKey storeKey, InputStream inputStream, String contentType) {
-    openStackService.upload(storeKey.getKey(), inputStream, contentType);
+  protected void uploadSave(StoreKey storeKey, InputStream inputStream) {
+    openStackService.upload(storeKey.getKey(), inputStream, "/image");
     try {
       Image image = new Image();
       image.setCameraId(storeKey.getCameraId());
